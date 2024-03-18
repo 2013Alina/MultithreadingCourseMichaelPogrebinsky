@@ -63,9 +63,62 @@ public class ImageProcessing {
      File outputFile = new File(DESTINATION_FILE);
      ImageIO.write(resultImage, "jpg", outputFile);
 
-     System.out.println(String.valueOf(duration)); // 381 миллисекунд
-
-    } 
+     System.out.println(String.valueOf(duration)); // 382 миллисекунд
+    }
+     
+//     // продолжительность работы 6 потоков(main + numberOfThread =5)!
+     
+//     long startTime = System.currentTimeMillis();
+//
+//     int numberOfThread = 5;
+//     recolorMultithreaded(originalImage, resultImage, numberOfThread);
+//
+//     long endTime = System.currentTimeMillis();
+//
+//     long duration = endTime - startTime;
+//
+//     File outputFile = new File(DESTINATION_FILE);
+//     ImageIO.write(resultImage, "jpg", outputFile);
+//
+//     System.out.println(String.valueOf(duration)); // 332 миллисекунд
+//
+//    } 
+        
+     // продолжительность работы 9 потоков(main + numberOfThread =8)!
+        
+//        long startTime = System.currentTimeMillis();
+//
+//        int numberOfThread = 8;
+//        recolorMultithreaded(originalImage, resultImage, numberOfThread);
+//
+//        long endTime = System.currentTimeMillis();
+//
+//        long duration = endTime - startTime;
+//
+//        File outputFile = new File(DESTINATION_FILE);
+//        ImageIO.write(resultImage, "jpg", outputFile);
+//
+//        System.out.println(String.valueOf(duration)); // 289 миллисекунд!!!!
+//
+//       } 
+        
+ // продолжительность работы 11 потоков(main + numberOfThread =10)!
+        
+//        long startTime = System.currentTimeMillis();
+//
+//        int numberOfThread = 10;
+//        recolorMultithreaded(originalImage, resultImage, numberOfThread);
+//
+//        long endTime = System.currentTimeMillis();
+//
+//        long duration = endTime - startTime;
+//
+//        File outputFile = new File(DESTINATION_FILE);
+//        ImageIO.write(resultImage, "jpg", outputFile);
+//
+//        System.out.println(String.valueOf(duration)); // 356 миллисекунд! ХУЖЕ!!!!
+//
+//       } 
     
     public static void recolorMultithreaded(BufferedImage originalImage, BufferedImage resultImage,
             int numberOfThreads) {
@@ -124,9 +177,9 @@ public class ImageProcessing {
         int newBlue;
         
         if(isShadeOfGrey(red, green, blue)) { //делаю цветы фиолетового цвета а не белого
-            newRed = Math.min(255, red + 10);
+            newRed = Math.min(255, red + 5);
             newGreen = Math.max(0, green - 80);
-            newBlue = Math.max(0, blue - 20);
+            newBlue = Math.max(0, blue - 10);
         }else {
             newRed = red;
             newGreen = green;
@@ -157,8 +210,8 @@ public class ImageProcessing {
         int rgb = 0;
         
         rgb |= blue;
-        rgb |= green << 8;
-        rgb |= red << 16;
+        rgb |= green << 8;  //8 bits
+        rgb |= red << 16;   // 16 bits
         
         rgb |= 0xFF000000; //прозрачность
         
