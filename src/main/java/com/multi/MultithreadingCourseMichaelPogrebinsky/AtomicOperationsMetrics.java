@@ -65,7 +65,7 @@ public class AtomicOperationsMetrics {
         private long count = 0;
         private volatile double average = 0.0; //для атомарности операций над average
         
-        public synchronized void addSample(long sample) {
+        public synchronized void addSample(long sample) { // синхронизация метода
             double currentSum = average * count;
             count ++;
             average = (currentSum + sample) / count;
