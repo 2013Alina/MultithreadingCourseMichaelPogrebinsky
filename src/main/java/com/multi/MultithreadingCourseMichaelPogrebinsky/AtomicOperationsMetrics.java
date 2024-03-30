@@ -3,6 +3,7 @@ package com.multi.MultithreadingCourseMichaelPogrebinsky;
 import java.util.Random;
 
 public class AtomicOperationsMetrics {
+    // volatile - для long и double переменных, чтобы операции(геттер и сеттер) с ними были атомарними, устроняет проблему Race Condition!
     
     public static void main(String[] args) {
         Metrics metrics = new Metrics();
@@ -63,7 +64,7 @@ public class AtomicOperationsMetrics {
     
     public static class Metrics{
         private long count = 0;
-        private volatile double average = 0.0; //для атомарности операций над average
+        private volatile double average = 0.0; //для атомарности операции геттер над average
         
         public synchronized void addSample(long sample) { // синхронизация метода
             double currentSum = average * count;
@@ -71,7 +72,7 @@ public class AtomicOperationsMetrics {
             average = (currentSum + sample) / count;
         }
         
-        public double getAverage() {
+        public double getAverage() { // теперь операция в геттере атомарная!
             return average;
         }
         
